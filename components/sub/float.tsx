@@ -41,7 +41,7 @@ export default function FloatMenu({
     }
     setIsPublishing(true);
     axios
-      .post(`http://localhost:8080/comment/create/${questionID}`, {
+      .post(`https://api-resubase.vercel.app/comment/create/${questionID}`, {
         userid: userData?.id,
         username: userData?.fullName,
         imageURL: userData?.profileImageUrl,
