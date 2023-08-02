@@ -112,7 +112,7 @@ git push origin my-feature
 
 - Our team will review your Pull Request, provide feedback, and merge it once everything looks good.
 
-# License
+## License
 
 Resubase is open-source software licensed under the MIT License. See the LICENSE file for more information.
 
