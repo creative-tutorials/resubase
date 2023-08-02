@@ -4,12 +4,12 @@
 
 ## Table of Contents
 
-- **Introduction**
-- **Features**
-- **Tech Stack**
-- **Get Started**
-- **Contribution Guidelines**
-- **License**
+- **[Introduction](#introduction)**
+- **[Features](#features)**
+- **[Tech Stack](#tech-stack)**
+- **[Get Started](#getting-started)**
+- **[Contribution Guidelines](#contribution-guidelines)**
+- **[License](#license)**
 
 ## Introduction
 
