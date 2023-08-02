@@ -37,6 +37,7 @@ body:
         - Safari
         - Microsoft Edge
         - Brave
+        - All
   - type: textarea
     id: screenshots
     attributes:
