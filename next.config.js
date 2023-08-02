@@ -7,9 +7,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'images.clerk.dev',
         port: '',
-        pathname: '/**',
+        pathname: '/*',
       },
     ],
+    domains: ['images.clerk.dev'],
   },
 }
 
