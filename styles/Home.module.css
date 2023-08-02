@@ -1,229 +1,316 @@
-.main {
+.header {
+  width: 100%;
+  background-color: var(--header-bg);
+  padding: 15px 55px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
+}
+.inputBx {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.inputBx input {
+  width: 100%;
+  padding: 15px 25px;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: #a9aaab;
+}
+.inputBx input::placeholder {
+  color: #a9aaab;
+}
+.center {
+  padding: 55px;
+}
+.field {
+  width: 100%;
+  background-color: var(--darker-bg);
+  border: 1px solid var(--dark2-bg);
+  border-radius: 5px;
+  padding: 20px;
+}
+.field textarea {
+  width: 100%;
+  padding: 18px 20px;
+  resize: none;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  color: #fff;
+}
+.field textarea::placeholder {
+  color: #a9aaab;
+}
+.bottomField {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.btnBx #postBtn {
+  padding: 15px 35px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: rgb(50, 96, 233);
+  color: #fff;
+  cursor: pointer;
+  opacity: 0.2;
+  pointer-events: none;
+}
+.btnBx #postBtn.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.btnBx #postBtn[data-state="active"] {
+  opacity: 0.2;
+  pointer-events: none;
+}
+.question {
+  margin-top: 3rem;
+}
+.qusBx {
+  width: 100%;
+  background-color: var(--darker-bg);
+  border: 1px solid var(--dark2-bg);
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 1rem;
+}
+.qusProfile {
+  display: flex;
+  gap: 0.8rem;
+}
+.qusUser {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6rem;
-  min-height: 100vh;
+  gap: 0.4rem;
 }
-
-.description {
-  display: inherit;
-  justify-content: inherit;
-  align-items: inherit;
-  font-size: 0.85rem;
-  max-width: var(--max-width);
-  width: 100%;
-  z-index: 2;
-  font-family: var(--font-mono);
+.qusUser #qusName {
+  color: #fff;
+  font-weight: 500;
 }
-
-.description a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.description p {
-  position: relative;
-  margin: 0;
-  padding: 1rem;
-  background-color: rgba(var(--callout-rgb), 0.5);
-  border: 1px solid rgba(var(--callout-border-rgb), 0.3);
-  border-radius: var(--border-radius);
-}
-
-.code {
-  font-weight: 700;
-  font-family: var(--font-mono);
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(25%, auto));
-  width: var(--max-width);
-  max-width: 100%;
-}
-
-.card {
-  padding: 1rem 1.2rem;
-  border-radius: var(--border-radius);
-  background: rgba(var(--card-rgb), 0);
-  border: 1px solid rgba(var(--card-border-rgb), 0);
-  transition: background 200ms, border 200ms;
-}
-
-.card span {
-  display: inline-block;
-  transition: transform 200ms;
-}
-
-.card h2 {
-  font-weight: 600;
-  margin-bottom: 0.7rem;
-}
-
-.card p {
-  margin: 0;
-  opacity: 0.6;
+.qusUser #qusDate {
+  color: #a9aaab;
+  font-weight: 400;
   font-size: 0.9rem;
-  line-height: 1.5;
-  max-width: 30ch;
 }
-
-.center {
+.qusText {
+  margin-top: 1rem;
+}
+.qusText p {
+  color: #a9aaab;
+}
+.qusBtn {
+  margin-top: 1rem;
+}
+.qusBtn {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  padding: 4rem 0;
+  gap: 1rem;
 }
-
-.center::before {
-  background: var(--secondary-glow);
-  border-radius: 50%;
-  width: 480px;
-  height: 360px;
-  margin-left: -400px;
+.qusUpvote,
+.qusDownVote #counter {
+  color: #fff;
+  font-size: 0.9rem;
 }
-
-.center::after {
-  background: var(--primary-glow);
-  width: 240px;
-  height: 180px;
-  z-index: -1;
+/* Float Comment Bx */
+.float {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: rgba(14, 16, 21, 0.775);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: 1;
+  top: 0;
+  left: 0px;
+  padding: 20px;
+  transform: scale(0);
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
-
-.center::before,
-.center::after {
-  content: '';
-  left: 50%;
-  position: absolute;
-  filter: blur(45px);
-  transform: translateZ(0);
+.float#active {
+  transform: scale(1);
+  pointer-events: auto;
 }
-
-.logo {
-  position: relative;
+.commentBox {
+  margin-top: 10rem;
 }
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  .card:hover {
-    background: rgba(var(--card-rgb), 0.1);
-    border: 1px solid rgba(var(--card-border-rgb), 0.15);
-  }
-
-  .card:hover span {
-    transform: translateX(4px);
-  }
+.commentBox textarea {
+  width: 100%;
+  height: 400px;
+  padding: 30px;
+  border-radius: 10px;
+  resize: none;
+  border: none;
+  outline: none;
+  background-color: var(--dark2-bg);
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  color: #ffffff;
 }
-
-@media (prefers-reduced-motion) {
-  .card:hover span {
-    transform: none;
-  }
+.commentBox textarea::placeholder {
+  color: #a9aaab;
 }
-
-/* Mobile */
-@media (max-width: 700px) {
-  .content {
-    padding: 4rem;
+.float .close {
+  cursor: pointer;
+}
+.float .cmBtn {
+  margin-top: 1rem;
+}
+.commentBox .cmBtn #publish {
+  padding: 13px 25px;
+  border: none;
+  outline: none;
+  background-color: rgb(50, 96, 233);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 5px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.commentBox .cmBtn #publish.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.commentBox .cmBtn #publish[data-state="active"] {
+  opacity: 0.2;
+  pointer-events: none;
+}
+@media screen and (max-width: 472px) {
+  .header {
+    width: 100%;
+    background-color: var(--header-bg);
+    padding: 15px 35px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
   }
-
-  .grid {
-    grid-template-columns: 1fr;
-    margin-bottom: 120px;
-    max-width: 320px;
-    text-align: center;
-  }
-
-  .card {
-    padding: 1rem 2.5rem;
-  }
-
-  .card h2 {
-    margin-bottom: 0.5rem;
-  }
-
   .center {
-    padding: 8rem 0 6rem;
+    padding: 35px;
   }
-
-  .center::before {
-    transform: none;
-    height: 300px;
+  .qusText p {
+    font-size: 0.9rem;
   }
-
-  .description {
+  .qusUser #qusName {
+    font-size: 0.9rem;
+  }
+  .qusUser #qusDate {
+    font-size: 0.9rem;
+  }
+  .qusComment svg {
+    width: 18px;
+    height: 18px;
+  }
+  .qusUpvote svg {
+    width: 18px;
+    height: 18px;
+  }
+  .qusDownVote svg {
+    width: 18px;
+    height: 18px;
+  }
+  .qusView svg {
+    width: 18px;
+    height: 18px;
+  }
+  .qusUpvote,
+  .qusDownVote #counter {
     font-size: 0.8rem;
   }
-
-  .description a {
-    padding: 1rem;
+  .inputBx input {
+    font-size: 0.9rem;
   }
-
-  .description p,
-  .description div {
-    display: flex;
-    justify-content: center;
-    position: fixed;
+  .uploadBtn svg {
+    width: 18px;
+    height: 18px;
+  }
+  .inputBx svg {
+    width: 18px;
+    height: 18px;
+  }
+  .btnBx #postBtn {
+    font-size: 0.9rem;
+  }
+  .field textarea {
+    font-size: 0.9rem;
+  }
+}
+@media (prefers-color-scheme: light) {
+  .header {
+    background-color: var(--light-bg);
+  }
+  .inputBx input {
     width: 100%;
-  }
-
-  .description p {
-    align-items: center;
-    inset: 0 0 auto;
-    padding: 2rem 1rem 1.4rem;
-    border-radius: 0;
+    padding: 15px 25px;
+    font-size: 1rem;
     border: none;
-    border-bottom: 1px solid rgba(var(--callout-border-rgb), 0.25);
-    background: linear-gradient(
-      to bottom,
-      rgba(var(--background-start-rgb), 1),
-      rgba(var(--callout-rgb), 0.5)
-    );
-    background-clip: padding-box;
-    backdrop-filter: blur(24px);
+    outline: none;
+    background-color: transparent;
+    color: var(--dark2-bg);
   }
-
-  .description div {
-    align-items: flex-end;
-    pointer-events: none;
-    inset: auto 0 0;
-    padding: 2rem;
-    height: 200px;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgb(var(--background-end-rgb)) 40%
-    );
-    z-index: 1;
+  .inputBx input::placeholder {
+    color: var(--dark2-bg);
   }
-}
-
-/* Tablet and Smaller Desktop */
-@media (min-width: 701px) and (max-width: 1120px) {
-  .grid {
-    grid-template-columns: repeat(2, 50%);
+  .inputBx svg {
+    stroke: var(--dark2-bg);
   }
-}
-
-@media (prefers-color-scheme: dark) {
-  .vercelLogo {
-    filter: invert(1);
+  .field {
+    width: 100%;
+    background-color: var(--light-bg);
+    border: 1px solid #c7c7ee;
+    border-radius: 5px;
+    padding: 20px;
   }
-
-  .logo {
-    filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
+  .field textarea {
+    color: var(--darker-bg);
   }
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(360deg);
+  .field textarea::placeholder {
+    color: var(--darker-bg);
   }
-  to {
-    transform: rotate(0deg);
+  .uploadBtn svg {
+    stroke: var(--darker-bg);
+  }
+  .qusBx {
+    background-color: var(--light-bg);
+    border: 1px solid #c7c7ee;
+  }
+  .qusText p {
+    color: var(--darker-bg);
+  }
+  .qusUser #qusName {
+    color: var(--dark-bg);
+    font-weight: 500;
+  }
+  .qusUser #qusDate {
+    color: var(--dark-bg);
+    font-weight: 400;
+  }
+  .qusComment svg {
+    stroke: var(--dark-bg);
+  }
+  .qusUpvote svg {
+    stroke: var(--dark-bg);
+  }
+  .qusDownVote svg {
+    stroke: var(--dark-bg);
+  }
+  .qusView svg {
+    stroke: var(--dark-bg);
+  }
+  .qusUpvote,
+  .qusDownVote #counter {
+    color: var(--dark2-bg);
+    font-size: 0.9rem;
   }
 }

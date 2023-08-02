@@ -1,0 +1,141 @@
+.main {
+  padding: 50px;
+}
+.longLine {
+  width: 1px;
+  height: 350px;
+  background-color: var(--dark2-bg);
+  position: relative;
+  border-radius: 10px;
+}
+.longLine::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 85px;
+  background-color: #3e3e42;
+  border-radius: 10px;
+}
+.answerBox {
+  margin-top: 2rem;
+  width: 100%;
+  background-color: var(--darker-bg);
+  border: 1px solid var(--dark2-bg);
+  border-radius: 5px;
+  padding: 20px;
+}
+.answProfile {
+  display: flex;
+  gap: 0.8rem;
+}
+.answUser {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.answUser #answName {
+  color: #fff;
+  font-weight: 500;
+}
+.answUser #answDate {
+  color: #a9aaab;
+  font-weight: 400;
+  font-size: 0.9rem;
+}
+.answText {
+  margin-top: 1rem;
+}
+.answText p {
+  color: #a9aaab;
+}
+.answBtn {
+  margin-top: 1rem;
+}
+.answBtn {
+  display: flex;
+  gap: 1rem;
+}
+.answUpvote,
+.answDownVote #counter {
+  color: #fff;
+  font-size: 0.9rem;
+}
+@media screen and (max-width: 472px) {
+  .main {
+    padding: 35px;
+  }
+  .answText p {
+    font-size: 0.9rem;
+  }
+  .answUser #answName {
+    font-size: 0.9rem;
+  }
+  .answUser #answDate {
+    font-size: 0.9rem;
+  }
+  .answComment svg {
+    width: 18px;
+    height: 18px;
+  }
+  .answUpvote svg {
+    width: 18px;
+    height: 18px;
+  }
+  .answDownVote svg {
+    width: 18px;
+    height: 18px;
+  }
+  .answUpvote,
+  .answDownVote #counter {
+    font-size: 0.8rem;
+  }
+}
+@media (prefers-color-scheme: light) {
+  .longLine {
+    width: 1px;
+    height: 350px;
+    background-color: #c7c7ee;
+    position: relative;
+    border-radius: 10px;
+  }
+  .longLine::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 85px;
+    background-color: #c7c7ee;
+    border-radius: 10px;
+  }
+  .answerBox {
+    background-color: var(--light-bg);
+    border: 1px solid #c7c7ee;
+  }
+  .answText p {
+    color: var(--darker-bg);
+  }
+  .answUser #answName {
+    color: var(--dark-bg);
+    font-weight: 500;
+  }
+  .answUser #answDate {
+    color: var(--darker-bg);
+  }
+  .answComment svg {
+    stroke: var(--dark-bg);
+  }
+  .answUpvote svg {
+    stroke: var(--dark-bg);
+  }
+  .answDownVote svg {
+    stroke: var(--dark-bg);
+  }
+  .answUpvote,
+  .answDownVote #counter {
+    color: var(--dark2-bg);
+    font-size: 0.9rem;
+  }
+}
