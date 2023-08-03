@@ -23,6 +23,7 @@ export default function Page() {
           property="og:title"
           content="Resubase is a powerful platform designed to cater to the needs of developers worldwide."
         />
+        <meta name="google-site-verification" content="l1a2fyP4jz21WqSIR2HNxLAyt__hUNkV-48f_zbVHYE" />
         <link
           rel="apple-touch-icon"
           sizes="180x180"
