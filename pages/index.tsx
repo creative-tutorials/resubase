@@ -18,6 +18,10 @@ export default function Home() {
   const [isPosting, setIsPosting] = useState(false);
   const [isFloatActive, setIsFloatActive] = useState(false);
   const [questionID, setQuestionID] = useState("");
+  const [logState, setLogState] = useState({
+    isVisible: false,
+    logMessage: "aa",
+  });
 
   const { isSignedIn, user } = useUser();
 
@@ -48,7 +52,7 @@ export default function Home() {
     const userData = user;
     setIsPosting(true);
     axios
-      .post("https://api-resubase.vercel.app/question/create", {
+      .post("http://localhost:8080/question/create", {
         userid: userData?.id,
         username: userData?.fullName,
         imageURL: userData?.profileImageUrl,
@@ -67,7 +71,7 @@ export default function Home() {
 
   const fetchQuestions = async () => {
     axios
-      .get("https://api-resubase.vercel.app/questions")
+      .get("http://localhost:8080/questions")
       .then(function (response) {
         setQuestion(response.data);
       })
@@ -76,8 +80,46 @@ export default function Home() {
       });
   };
 
+  const deletePost = (id: string) => {
+    if (!isSignedIn) {
+      console.error("User not signed in");
+    }
+    const userData = user;
+    axios
+      .delete(`http://localhost:8080/question/${id}`, {
+        data: {
+          userid: userData?.id,
+        },
+      })
+      .then(function (response) {
+        console.log(response.data);
+
+        fetchQuestions();
+      })
+      .catch(function (error) {
+        console.error(error.response);
+        setLogState((prev) => {
+          return {
+            ...prev,
+            isVisible: true,
+            logMessage: error.response.data.error,
+          };
+        });
+      });
+  };
+
   const viewAnswers = (id: string) => {
     router.push(`/answers/${id}`);
+  };
+
+  const hideDialogue = () => {
+    setLogState((prev) => {
+      return {
+        ...prev,
+        isVisible: false,
+        logMessage: "",
+      };
+    });
   };
 
   return (
@@ -196,6 +238,7 @@ export default function Home() {
             setQuestionID={setQuestionID}
             viewAnswers={viewAnswers}
             styles={styles}
+            deletePost={deletePost}
           />
         </div>
         <FloatMenu
@@ -204,9 +247,25 @@ export default function Home() {
           setIsFloatActive={setIsFloatActive}
           questionID={questionID}
         />
+        <div
+          className={styles.dialogueWrapper}
+          id={logState.isVisible ? styles.active : ""}
+        >
+          <div className={styles.dialogue}>
+            <div className={styles.dialogueHeader}>
+              <h3>Unauthroized Access</h3>
+            </div>
+            <div className={styles.dialogueCenter}>
+              <p>{logState.logMessage}</p>
+            </div>
+            <div className={styles.dialogueButtons}>
+              <button id={styles.cancel} onClick={hideDialogue}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
       </main>
     </>
   );
 }
-
-

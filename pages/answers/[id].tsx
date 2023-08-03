@@ -39,7 +39,7 @@ export default function Qustion() {
 
   const fetchAnswers = async (id: string | string[]) => {
     axios
-      .get(`https://api-resubase.vercel.app/comments/${id}`)
+      .get(`http://localhost:8080/comments/${id}`)
       .then(function (response) {
         setAnswers(response.data);
       })

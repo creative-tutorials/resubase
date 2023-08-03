@@ -1,6 +1,5 @@
 import { Dispatch, Fragment, SetStateAction } from "react";
 import Image from "next/image";
-
 interface QuestiopComProp {
   question: never[];
   setIsFloatActive: Dispatch<SetStateAction<boolean>>;
@@ -8,7 +7,8 @@ interface QuestiopComProp {
   viewAnswers: (id: string) => void;
   styles: {
     readonly [key: string]: string;
-  };
+  },
+  deletePost: (id: string) => void
 }
 
 export default function Question({
@@ -17,8 +17,8 @@ export default function Question({
   setQuestionID,
   viewAnswers,
   styles,
+  deletePost,
 }: QuestiopComProp) {
-
   interface QuestionProp {
     username: string;
     date: string;
@@ -30,6 +30,9 @@ export default function Question({
       downvotes: number;
     };
   }
+
+
+  
   return (
     <div className={styles.question}>
       {question.map((item: QuestionProp, index: number) => {
@@ -46,7 +49,7 @@ export default function Question({
                       objectFit: "cover",
                       borderRadius: "50%",
                     }}
-                    alt="Picture of the author"
+                    alt="User"
                     title={item.username}
                   />
                 </div>
@@ -147,6 +150,31 @@ export default function Question({
                   >
                     <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                     <path d="M12 9a3 3 0 1 0 0 6 3 3 0 1 0 0-6z"></path>
+                  </svg>
+                </span>
+                <span
+                  className={styles.qusDelete}
+                  title="Delete Post"
+                  onClick={() => deletePost(item.questionID)}
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    fill="none"
+                    stroke="#f67f92"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    style={{
+                      cursor: "pointer",
+                    }}
+                  >
+                    <path d="M3 6h18"></path>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    <path d="M10 11v6"></path>
+                    <path d="M14 11v6"></path>
                   </svg>
                 </span>
               </div>

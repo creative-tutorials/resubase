@@ -4,10 +4,11 @@
   --header-bg: #19191a;
   --darker-bg: #171719;
   --dark2-bg: #212124;
+  ---selection-dark-color: #343438;
   --light-bg: #f3fbfe;
 }
 ::selection {
-  background-color: var(--dark2-bg);
+  background-color: var(---selection-dark-color);
 }
 * {
   margin: 0;
