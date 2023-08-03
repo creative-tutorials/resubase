@@ -52,7 +52,7 @@ export default function Home() {
     const userData = user;
     setIsPosting(true);
     axios
-      .post("http://localhost:8080/question/create", {
+      .post("https://api-resubase.vercel.app/question/create", {
         userid: userData?.id,
         username: userData?.fullName,
         imageURL: userData?.profileImageUrl,
@@ -71,7 +71,7 @@ export default function Home() {
 
   const fetchQuestions = async () => {
     axios
-      .get("http://localhost:8080/questions")
+      .get("https://api-resubase.vercel.app/questions")
       .then(function (response) {
         setQuestion(response.data);
       })
@@ -86,7 +86,7 @@ export default function Home() {
     }
     const userData = user;
     axios
-      .delete(`http://localhost:8080/question/${id}`, {
+      .delete(`https://api-resubase.vercel.app/question/${id}`, {
         data: {
           userid: userData?.id,
         },
