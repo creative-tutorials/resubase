@@ -11,10 +11,7 @@ export default function Page() {
           name="description"
           content="Sign in to start asking your questions"
         />
-        <meta
-          name="google-site-verification"
-          content="l1a2fyP4jz21WqSIR2HNxLAyt__hUNkV-48f_zbVHYE"
-        />
+        <meta name="google-site-verification" content="l1a2fyP4jz21WqSIR2HNxLAyt__hUNkV-48f_zbVHYE" />
         <meta
           name="twitter:card"
           content="Resubase is a powerful platform designed to cater to the needs of developers worldwide."
