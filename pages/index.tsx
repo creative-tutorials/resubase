@@ -130,6 +130,10 @@ export default function Home() {
           name="description"
           content="Resubase is a powerful platform designed to cater to the needs of developers worldwide."
         />
+        <meta
+          name="google-site-verification"
+          content="l1a2fyP4jz21WqSIR2HNxLAyt__hUNkV-48f_zbVHYE"
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="twitter:card"
@@ -142,7 +146,6 @@ export default function Home() {
           property="og:title"
           content="Resubase is a powerful platform designed to cater to the needs of developers worldwide."
         />
-        <meta name="google-site-verification" content="l1a2fyP4jz21WqSIR2HNxLAyt__hUNkV-48f_zbVHYE" />
 
         <link
           rel="apple-touch-icon"
