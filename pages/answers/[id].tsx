@@ -84,6 +84,7 @@ export default function Qustion() {
           sizes="16x16"
           href="/app/favicon-16x16.png"
         />
+        <link rel="icon" href="/app/favicon.ico" sizes="any" />
         <link rel="manifest" href="/app/site.webmanifest" />
       </Head>
       <main className={answ.main}>

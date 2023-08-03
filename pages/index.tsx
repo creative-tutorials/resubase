@@ -2,9 +2,10 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import FloatMenu from "@/components/sub/float";
+import Dialogue from "@/components/sub/dialogue";
 import Question from "@/components/main/questionBx";
 import { UserButton, useUser } from "@clerk/nextjs";
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 
@@ -130,7 +131,10 @@ export default function Home() {
           name="description"
           content="Resubase is a powerful platform designed to cater to the needs of developers worldwide."
         />
-        <meta name="google-site-verification" content="l1a2fyP4jz21WqSIR2HNxLAyt__hUNkV-48f_zbVHYE" />
+        <meta
+          name="google-site-verification"
+          content="l1a2fyP4jz21WqSIR2HNxLAyt__hUNkV-48f_zbVHYE"
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="twitter:card"
@@ -161,6 +165,7 @@ export default function Home() {
           sizes="16x16"
           href="/app/favicon-16x16.png"
         />
+        <link rel="icon" href="/app/favicon.ico" sizes="any" />
         <link rel="manifest" href="/app/site.webmanifest" />
       </Head>
       <main className={`${styles.main}`}>
@@ -263,24 +268,11 @@ export default function Home() {
           setIsFloatActive={setIsFloatActive}
           questionID={questionID}
         />
-        <div
-          className={styles.dialogueWrapper}
-          id={logState.isVisible ? styles.active : ""}
-        >
-          <div className={styles.dialogue}>
-            <div className={styles.dialogueHeader}>
-              <h3>Unauthroized Access</h3>
-            </div>
-            <div className={styles.dialogueCenter}>
-              <p>{logState.logMessage}</p>
-            </div>
-            <div className={styles.dialogueButtons}>
-              <button id={styles.cancel} onClick={hideDialogue}>
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
+        <Dialogue
+          styles={styles}
+          hideDialogue={hideDialogue}
+          logState={logState}
+        />
       </main>
     </>
   );
