@@ -306,6 +306,9 @@
   .field textarea {
     font-size: 0.9rem;
   }
+  .dialogueWrapper {
+    padding: 20px;
+  }
 }
 @media (prefers-color-scheme: light) {
   .header {
