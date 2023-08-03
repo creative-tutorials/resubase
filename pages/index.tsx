@@ -93,8 +93,6 @@ export default function Home() {
         },
       })
       .then(function (response) {
-        console.log(response.data);
-
         fetchQuestions();
       })
       .catch(function (error) {
@@ -106,6 +104,27 @@ export default function Home() {
             logMessage: error.response.data.error,
           };
         });
+      });
+  };
+
+  const upvoteQuestion = async (id: string) => {
+    axios
+      .put(`https://api-resubase.vercel.app/upvote/${id}`)
+      .then(function (response) {
+        fetchQuestions();
+      })
+      .catch(function (error) {
+        console.error(error.response);
+      });
+  };
+  const downvoteQuestion = async (id: string) => {
+    axios
+      .put(`https://api-resubase.vercel.app/downvote/${id}`)
+      .then(function (response) {
+        fetchQuestions();
+      })
+      .catch(function (error) {
+        console.error(error.response);
       });
   };
 
@@ -260,6 +279,8 @@ export default function Home() {
             viewAnswers={viewAnswers}
             styles={styles}
             deletePost={deletePost}
+            upvoteQuestion={upvoteQuestion}
+            downvoteQuestion={downvoteQuestion}
           />
         </div>
         <FloatMenu

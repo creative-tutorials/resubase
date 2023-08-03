@@ -7,8 +7,10 @@ interface QuestiopComProp {
   viewAnswers: (id: string) => void;
   styles: {
     readonly [key: string]: string;
-  },
-  deletePost: (id: string) => void
+  };
+  deletePost: (id: string) => void;
+  upvoteQuestion: (id: string) => void;
+  downvoteQuestion: (id: string) => void;
 }
 
 export default function Question({
@@ -18,6 +20,8 @@ export default function Question({
   viewAnswers,
   styles,
   deletePost,
+  upvoteQuestion,
+  downvoteQuestion,
 }: QuestiopComProp) {
   interface QuestionProp {
     username: string;
@@ -31,8 +35,6 @@ export default function Question({
     };
   }
 
-
-  
   return (
     <div className={styles.question}>
       {question.map((item: QuestionProp, index: number) => {
@@ -89,7 +91,11 @@ export default function Question({
                     <path d="M17.5 15H9"></path>
                   </svg>
                 </span>
-                <span className={styles.qusUpvote} title="Upvote">
+                <span
+                  className={styles.qusUpvote}
+                  title="Upvote"
+                  onClick={() => upvoteQuestion(item.questionID)}
+                >
                   <svg
                     width="20"
                     height="20"
@@ -109,7 +115,11 @@ export default function Question({
                   </svg>
                   <span id={styles.counter}>{item.interactions.upvotes}</span>
                 </span>
-                <span className={styles.qusDownVote} title="Downvote">
+                <span
+                  className={styles.qusDownVote}
+                  title="Downvote"
+                  onClick={() => downvoteQuestion(item.questionID)}
+                >
                   <svg
                     width="20"
                     height="20"
