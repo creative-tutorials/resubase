@@ -258,7 +258,7 @@
     justify-content: space-between;
   }
   .center {
-    padding: 35px;
+    padding: 15px;
   }
   .qusText p {
     font-size: 0.9rem;
@@ -308,6 +308,16 @@
   }
   .dialogueWrapper {
     padding: 20px;
+  }
+}
+@media screen and (max-width: 362px) {
+  .dialogueHeader h3 {
+    font-size: 1.3rem;
+    color: #f78e9e;
+  }
+  .dialogueCenter p {
+    font-size: 1rem;
+    color: #fff;
   }
 }
 @media (prefers-color-scheme: light) {
