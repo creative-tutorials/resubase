@@ -1,10 +1,11 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
+import Header from "@/components/main/Header";
 import FloatMenu from "@/components/sub/float";
 import Dialogue from "@/components/sub/dialogue";
 import Question from "@/components/main/questionBx";
-import { UserButton, useUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -144,72 +145,60 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>Resubase</title>
-        <meta
-          name="description"
-          content="Resubase is a powerful platform designed to cater to the needs of developers worldwide."
-        />
-        <meta
-          name="google-site-verification"
-          content="l1a2fyP4jz21WqSIR2HNxLAyt__hUNkV-48f_zbVHYE"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta
-          name="twitter:card"
-          content="Resubase is a powerful platform designed to cater to the needs of developers worldwide."
-        />
-        <meta name="twitter:site" content="Resubase" />
-        <meta name="twitter:creator" content="@timi" />
-        <meta property="og:url" content="resubase.vercel.app" />
-        <meta
-          property="og:title"
-          content="Resubase is a powerful platform designed to cater to the needs of developers worldwide."
-        />
+      <title>Resubase - Designed to cater the needs of developers</title>
+      <meta
+        name="description"
+        content="Resubase is a powerful platform designed to cater to the needs of developers worldwide."
+      />
+      <meta
+        name="google-site-verification"
+        content="l1a2fyP4jz21WqSIR2HNxLAyt__hUNkV-48f_zbVHYE"
+      />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta
+        name="twitter:card"
+        content="Resubase is a powerful platform designed to cater to the needs of developers worldwide."
+      />
+      <meta name="twitter:site" content="Resubase" />
+      <meta name="twitter:creator" content="@timi" />
+      <meta
+        property="og:title"
+        content="Resubase - Designed to cater the needs of developers"
+      />
+      <meta property="og:url" content="resubase.vercel.app" />
+      <meta property="og:image" content="/resubase-default.png" />
+      <meta property="og:site_name" content="Resubase" />
+      <meta property="og:type" content="website" />
+      <meta
+        property="og:description"
+        content="Resubase is a powerful platform designed to cater to the needs of developers worldwide."
+      />
+      <meta
+        property="og:title"
+        content="Resubase is a powerful platform designed to cater to the needs of developers worldwide."
+      />
 
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/app/apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/app/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/app/favicon-16x16.png"
-        />
-        <link rel="icon" href="/app/favicon.ico" sizes="any" />
-        <link rel="manifest" href="/app/site.webmanifest" />
-      </Head>
+      <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="/app/apple-touch-icon.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="/app/favicon-32x32.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="/app/favicon-16x16.png"
+      />
+      <link rel="icon" href="/app/favicon.ico" sizes="any" />
+      <link rel="manifest" href="/app/site.webmanifest" />
       <main className={`${styles.main}`}>
-        <div className={styles.header}>
-          <div className={styles.inputBx}>
-            <svg
-              width="20"
-              height="20"
-              fill="none"
-              stroke="#a9aaab"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M11 3a8 8 0 1 0 0 16 8 8 0 1 0 0-16z"></path>
-              <path d="m21 21-4.35-4.35"></path>
-            </svg>
-            <input type="text" placeholder="Search" />
-          </div>
-          <div className={styles.UserProfile}>
-            <UserButton />
-          </div>
-        </div>
+        <Header styles={styles} />
         <div className={styles.center}>
           <div className={styles.field}>
             <textarea

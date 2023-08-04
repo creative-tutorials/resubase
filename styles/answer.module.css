@@ -92,6 +92,11 @@
     font-size: 0.8rem;
   }
 }
+@media screen and (max-width: 472px) {
+  .main {
+    padding: 15px;
+  }
+}
 @media (prefers-color-scheme: light) {
   .longLine {
     width: 1px;

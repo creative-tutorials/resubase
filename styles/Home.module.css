@@ -25,6 +25,11 @@
 .inputBx input::placeholder {
   color: #a9aaab;
 }
+.home,
+.dailyproj,
+.work {
+  cursor: pointer;
+}
 .center {
   padding: 55px;
 }
@@ -386,5 +391,94 @@
   .qusDownVote #counter {
     color: var(--dark2-bg);
     font-size: 0.9rem;
+  }
+}
+.bars_center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* min-height: 100vh; */
+}
+.bars_center .bars {
+  width: 50.4px;
+  height: 44.8px;
+  --c: linear-gradient(
+    #b9b9f8 calc(50% - 11.2px),
+    #0000 0 calc(50% + 11.2px),
+    #b9b9f8 0
+  );
+  background: var(--c) 0% 100%, var(--c) 50% 100%, var(--c) 100% 100%;
+  background-size: 10.1px calc(200% + 22.4px);
+  background-repeat: no-repeat;
+  animation: bars-th2joa 0.8s infinite linear;
+}
+
+@keyframes bars-th2joa {
+  33% {
+    background-position: 0% 50%, 50% 100%, 100% 100%;
+  }
+
+  50% {
+    background-position: 0% 0%, 50% 50%, 100% 100%;
+  }
+
+  66% {
+    background-position: 0% 0%, 50% 0%, 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 0%, 50% 0%, 100% 0%;
+  }
+}
+.pulse {
+  position: relative;
+  width: 33.6px;
+  height: 33.6px;
+}
+
+.pulse:before,
+.pulse:after {
+  width: 33.6px;
+  height: 33.6px;
+  border-radius: 50%;
+  content: '';
+  display: block;
+}
+
+.pulse:before {
+  background-color: #dfdff7;
+  animation: pulse-7ypmgi 0.8s infinite ease;
+}
+
+.pulse:after {
+  animation: pulse-6r5w34 0.8s infinite;
+  border: 4.5px solid #dfdff7;
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+@keyframes pulse-7ypmgi {
+  0% {
+     transform: scale(0);
+  }
+
+  50% {
+     transform: scale(1);
+  }
+}
+
+@keyframes pulse-6r5w34 {
+  0%, 50% {
+     opacity: 0;
+  }
+
+  55% {
+     opacity: 1;
+  }
+
+  100% {
+     opacity: 0;
+     transform: scale(2);
   }
 }
