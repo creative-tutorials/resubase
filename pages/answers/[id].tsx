@@ -14,6 +14,7 @@ interface CommentProp {
     downvotes: number;
   };
   questionID: string;
+  commentID: string;
   isNew: boolean;
   username: string;
 }
@@ -36,6 +37,7 @@ export default function Qustion() {
     username: "",
   });
   const [isFetching, setIsFetching] = useState(false);
+  const [tempID, setTempID]:any = useState("");
 
   useEffect(() => {
     if (!id) {
@@ -56,9 +58,9 @@ export default function Qustion() {
     axios
       .get(`https://api-resubase.vercel.app/question/${id}`)
       .then(async function (response) {
-        console.log(response.data);
         setQuestions(response.data);
         await fetchAnswers(id);
+        setTempID(id);
         setIsFetching(false);
       })
       .catch(function (error) {
@@ -71,7 +73,6 @@ export default function Qustion() {
     axios
       .get(`https://api-resubase.vercel.app/comments/${id}`)
       .then(function (response) {
-        console.log(response.data);
         setAnswers(response.data);
       })
       .catch(function (error) {
@@ -100,47 +101,67 @@ export default function Qustion() {
       });
   };
 
+  const upvoteAnswer = async (id: string) => {
+    axios
+      .put(`https://api-resubase.vercel.app/comments/upvote/${id}`)
+      .then(function (response) {
+        fetchQuestions(tempID);
+      })
+      .catch(function (error) {
+        console.error(error.response);
+      });
+  };
+  const downvoteAnswer = async (id: string) => {
+    axios
+      .put(`https://api-resubase.vercel.app/comments/downvote/${id}`)
+      .then(function (response) {
+        fetchQuestions(tempID);
+      })
+      .catch(function (error) {
+        console.error(error.response);
+      });
+  };
+
   return (
     <>
       <Head>
-        <title>Answers</title>
-        <meta name="description" content="Answer to your question" />
+        <title>Resubase/Answers</title>
+        <meta name="description" content="Answer to the Question" />
         <meta
           name="google-site-verification"
           content="l1a2fyP4jz21WqSIR2HNxLAyt__hUNkV-48f_zbVHYE"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta
-          name="twitter:card"
-          content="Resubase is a powerful platform designed to cater to the needs of developers worldwide."
-        />
+        <meta name="twitter:card" content="Answer to the Question" />
         <meta name="twitter:site" content="Resubase" />
         <meta name="twitter:creator" content="@timi" />
+        <meta property="og:title" content="Resubase/Answers" />
         <meta property="og:url" content="resubase.vercel.app" />
-        <meta
-          property="og:title"
-          content="Resubase is a powerful platform designed to cater to the needs of developers worldwide."
-        />
+        <meta property="og:image" content="/resubase-default.png" />
+        <meta property="og:site_name" content="Resubase" />
+        <meta property="og:type" content="website" />
+        <meta property="og:description" content="Answer to the Question" />
+        <meta property="og:title" content="Resubase/Answers" />
 
         <link
           rel="apple-touch-icon"
           sizes="180x180"
-          href="/app/apple-touch-icon.png"
+          href="/apple-touch-icon.png?v=2"
         />
         <link
           rel="icon"
           type="image/png"
           sizes="32x32"
-          href="/app/favicon-32x32.png"
+          href="/favicon-32x32.png?v=2"
         />
         <link
           rel="icon"
           type="image/png"
           sizes="16x16"
-          href="/app/favicon-16x16.png"
+          href="/favicon-16x16.png?v=2"
         />
-        <link rel="icon" href="/app/favicon.ico" sizes="any" />
-        <link rel="manifest" href="/app/site.webmanifest" />
+        <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
+        <link rel="manifest" href="/site.webmanifest" />
       </Head>
       <main className={answ.main}>
         <div className={answ.longLine}></div>
@@ -268,7 +289,11 @@ export default function Qustion() {
                       <path d="M17.5 15H9"></path>
                     </svg>
                   </span>
-                  <span className={answ.answUpvote} title="Upvote">
+                  <span
+                    className={answ.answUpvote}
+                    title="Upvote"
+                    onClick={() => upvoteAnswer(item.commentID)}
+                  >
                     <svg
                       width="20"
                       height="20"
@@ -286,7 +311,11 @@ export default function Qustion() {
                     </svg>
                     <span id={answ.counter}>{item.interactions.upvotes}</span>
                   </span>
-                  <span className={answ.answDownVote} title="Downvote">
+                  <span
+                    className={answ.answDownVote}
+                    title="Downvote"
+                    onClick={() => downvoteAnswer(item.commentID)}
+                  >
                     <svg
                       width="20"
                       height="20"

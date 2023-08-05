@@ -11,7 +11,10 @@ export default function Page() {
           name="description"
           content="Sign up to start asking your questions"
         />
-        <meta name="google-site-verification" content="l1a2fyP4jz21WqSIR2HNxLAyt__hUNkV-48f_zbVHYE" />
+        <meta
+          name="google-site-verification"
+          content="l1a2fyP4jz21WqSIR2HNxLAyt__hUNkV-48f_zbVHYE"
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="twitter:card"
@@ -28,22 +31,22 @@ export default function Page() {
         <link
           rel="apple-touch-icon"
           sizes="180x180"
-          href="/app/apple-touch-icon.png"
+          href="/apple-touch-icon.png?v=2"
         />
         <link
           rel="icon"
           type="image/png"
           sizes="32x32"
-          href="/app/favicon-32x32.png"
+          href="/favicon-32x32.png?v=2"
         />
         <link
           rel="icon"
           type="image/png"
           sizes="16x16"
-          href="/app/favicon-16x16.png"
+          href="/favicon-16x16.png?v=2"
         />
-        <link rel="icon" href="/app/favicon.ico" sizes="any" />
-        <link rel="manifest" href="/app/site.webmanifest" />
+        <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
+        <link rel="manifest" href="/site.webmanifest" />
       </Head>
       <div className={ath.wrapper}>
         <SignUp />

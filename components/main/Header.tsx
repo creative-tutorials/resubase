@@ -1,5 +1,7 @@
 import { UserButton } from "@clerk/nextjs";
+import axios from "axios";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 interface HeaderProp {
   styles: {
@@ -9,6 +11,46 @@ interface HeaderProp {
 
 export default function Header({ styles }: HeaderProp) {
   const router = useRouter();
+  const [value, setValue] = useState("");
+  const [searchAlgorithm, setSearchAlgorithm] = useState({
+    question: "",
+  });
+
+  const updateValue = async (event: { target: { value: string } }) => {
+    // if(event.target.value.startsWith)
+    const inputValue = event.target.value;
+    setValue(inputValue);
+
+    if (inputValue.includes("question:")) {
+      const question = inputValue
+        .substring(inputValue.indexOf("question:") + 9)
+        .trim(); // Extract the rest of the input after "question:"
+      setSearchAlgorithm((prev) => {
+        return {
+          ...prev,
+          question,
+        };
+      });
+    }
+  };
+
+  const handleSearch = async (event: { key: string }) => {
+    if (event.key === "Enter") {
+      console.log(searchAlgorithm);
+
+      axios
+        .post(`https://api-resubase.vercel.app/question/query`, {
+          question: searchAlgorithm.question,
+        })
+        .then(function (response) {
+          // console.log(response.data);
+          router.push(`/query/question/${response.data.questionID}`)
+        })
+        .catch(function (error) {
+          console.error(error.response);
+        });
+    }
+  };
 
   return (
     <div className={styles.header}>
@@ -27,7 +69,13 @@ export default function Header({ styles }: HeaderProp) {
           <path d="M11 3a8 8 0 1 0 0 16 8 8 0 1 0 0-16z"></path>
           <path d="m21 21-4.35-4.35"></path>
         </svg>
-        <input type="text" placeholder="Search" />
+        <input
+          type="text"
+          value={value}
+          placeholder="Search"
+          onChange={updateValue}
+          onKeyUp={handleSearch}
+        />
       </div>
       <div
         className={styles.home}

@@ -24,6 +24,7 @@ export default function Home() {
     isVisible: false,
     logMessage: "aa",
   });
+  const [isFetching, setIsFetching] = useState(false);
 
   const { isSignedIn, user } = useUser();
 
@@ -72,13 +73,16 @@ export default function Home() {
   };
 
   const fetchQuestions = async () => {
+    setIsFetching(true);
     axios
       .get("https://api-resubase.vercel.app/questions")
       .then(function (response) {
         setQuestion(response.data);
+        setIsFetching(false);
       })
       .catch(function (error) {
         console.error(error.response);
+        setIsFetching(false);
       });
   };
 
@@ -181,22 +185,22 @@ export default function Home() {
       <link
         rel="apple-touch-icon"
         sizes="180x180"
-        href="/app/apple-touch-icon.png"
+        href="/apple-touch-icon.png?v=2"
       />
       <link
         rel="icon"
         type="image/png"
         sizes="32x32"
-        href="/app/favicon-32x32.png"
+        href="/favicon-32x32.png?v=2"
       />
       <link
         rel="icon"
         type="image/png"
         sizes="16x16"
-        href="/app/favicon-16x16.png"
+        href="/favicon-16x16.png?v=2"
       />
-      <link rel="icon" href="/app/favicon.ico" sizes="any" />
-      <link rel="manifest" href="/app/site.webmanifest" />
+      <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
+      <link rel="manifest" href="/hub/site.webmanifest" />
       <main className={`${styles.main}`}>
         <Header styles={styles} />
         <div className={styles.center}>
@@ -261,16 +265,22 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <Question
-            question={question}
-            setIsFloatActive={setIsFloatActive}
-            setQuestionID={setQuestionID}
-            viewAnswers={viewAnswers}
-            styles={styles}
-            deletePost={deletePost}
-            upvoteQuestion={upvoteQuestion}
-            downvoteQuestion={downvoteQuestion}
-          />
+          {isFetching ? (
+            <div className={styles.shapes_center}>
+              <div className={styles.shapes}></div>
+            </div>
+          ) : (
+            <Question
+              question={question}
+              setIsFloatActive={setIsFloatActive}
+              setQuestionID={setQuestionID}
+              viewAnswers={viewAnswers}
+              styles={styles}
+              deletePost={deletePost}
+              upvoteQuestion={upvoteQuestion}
+              downvoteQuestion={downvoteQuestion}
+            />
+          )}
         </div>
         <FloatMenu
           styles={styles}

@@ -50,10 +50,12 @@ export default function FloatMenu({
       .then(function (response) {
         setValue("");
         setIsPublishing(false);
+        setIsFloatActive(false)
       })
       .catch(function (error) {
         console.error(error.response);
         setIsPublishing(false);
+        setIsFloatActive(false)
       });
   };
 
