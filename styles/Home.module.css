@@ -389,11 +389,9 @@
 @media screen and (max-width: 362px) {
   .dialogueHeader h3 {
     font-size: 1.3rem;
-    color: #f78e9e;
   }
   .dialogueCenter p {
     font-size: 1rem;
-    color: #fff;
   }
 }
 @media (prefers-color-scheme: light) {
