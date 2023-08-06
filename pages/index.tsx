@@ -1,16 +1,38 @@
 import Head from "next/head";
+import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import Header from "@/components/main/Header";
 import FloatMenu from "@/components/sub/float";
 import Dialogue from "@/components/sub/dialogue";
-import Question from "@/components/main/questionBx";
+import Center from "@/components/main/home/center";
+
+import { createClient } from "@supabase/supabase-js";
 import { useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 
 const inter = Inter({ subsets: ["latin"] });
+
+type configProps = {
+  SupabaseAPPURL: string;
+  PublicAnonKey: string;
+};
+
+const config: configProps = {
+  SupabaseAPPURL: process.env.NEXT_PUBLIC_SUPABASE_URL as string,
+  PublicAnonKey: process.env.NEXT_PUBLIC_SUPABASE_PUBLIC_ANON_KEY as string,
+};
+
+const supabase = createClient(config.SupabaseAPPURL, config.PublicAnonKey);
+
+type TypeQImageProps = {
+  isImageUploading: boolean;
+  isComponentVisible: boolean;
+  isImageComponentVisible: boolean;
+  qImageURL: string;
+};
 
 export default function Home() {
   const [isActive, setIsActive] = useState(false);
@@ -22,8 +44,19 @@ export default function Home() {
   const [questionID, setQuestionID] = useState("");
   const [logState, setLogState] = useState({
     isVisible: false,
-    logMessage: "aa",
+    isErr: false,
+    logMessage: "",
+    headerMessage: "",
   });
+  const [qImageProps, setQImageProps] = useState<TypeQImageProps>({
+    isImageUploading: false,
+    isComponentVisible: false,
+    isImageComponentVisible: false,
+    qImageURL: "",
+  });
+
+  type ImageProps = typeof qImageProps;
+
   const [isFetching, setIsFetching] = useState(false);
 
   const { isSignedIn, user } = useUser();
@@ -59,12 +92,19 @@ export default function Home() {
         userid: userData?.id,
         username: userData?.fullName,
         imageURL: userData?.profileImageUrl,
+        thumbnailURL: qImageProps.qImageURL,
         question: value,
       })
       .then(function (response) {
         fetchQuestions();
         setValue("");
         setIsPosting(false);
+        setQImageProps((prev) => {
+          return {
+            ...prev,
+            isComponentVisible: true,
+          };
+        });
       })
       .catch(function (error) {
         console.error(error.response);
@@ -106,7 +146,9 @@ export default function Home() {
           return {
             ...prev,
             isVisible: true,
+            isErr: true,
             logMessage: error.response.data.error,
+            headerMessage: "Unauthroized Access",
           };
         });
       });
@@ -133,6 +175,70 @@ export default function Home() {
       });
   };
 
+  const handleImageUpload = async (event: any) => {
+    setQImageProps((prev) => {
+      return {
+        ...prev,
+        isImageUploading: true,
+      };
+    });
+    const file = event.target.files[0];
+    const fileName = file.name;
+    if (!file) {
+      console.log("No file selected");
+      setQImageProps((prev) => {
+        return {
+          ...prev,
+          isImageUploading: false,
+        };
+      });
+      return;
+    }
+
+    const { data, error } = await supabase.storage
+      .from("images")
+      .upload(`public/${fileName}`, file, {
+        cacheControl: "3600",
+        upsert: true,
+      });
+
+    if (error) {
+      console.error(error);
+    }
+    await getPublicURL(fileName, event);
+  };
+
+  async function getPublicURL(
+    fileName: string,
+    event: { target: { value: string } }
+  ) {
+    const { data } = supabase.storage
+      .from("images")
+      .getPublicUrl(`public/${fileName}`);
+
+    if (!data) {
+      console.error("No data");
+    }
+    setQImageProps((prev) => {
+      return {
+        ...prev,
+        qImageURL: data.publicUrl,
+        isImageUploading: false,
+      };
+    });
+    setLogState((prev) => {
+      return {
+        ...prev,
+        isVisible: true,
+        isErr: false,
+        logMessage:
+          "Your image assets has been uploaded to the server sucessfully",
+        headerMessage: "Image Uploaded!",
+      };
+    });
+    event.target.value = "";
+  }
+
   const viewAnswers = (id: string) => {
     router.push(`/answers/${id}`);
   };
@@ -149,139 +255,79 @@ export default function Home() {
 
   return (
     <>
-      <title>Resubase - Designed to cater the needs of developers</title>
-      <meta
-        name="description"
-        content="Resubase is a powerful platform designed to cater to the needs of developers worldwide."
-      />
-      <meta
-        name="google-site-verification"
-        content="l1a2fyP4jz21WqSIR2HNxLAyt__hUNkV-48f_zbVHYE"
-      />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <meta
-        name="twitter:card"
-        content="Resubase is a powerful platform designed to cater to the needs of developers worldwide."
-      />
-      <meta name="twitter:site" content="Resubase" />
-      <meta name="twitter:creator" content="@timi" />
-      <meta
-        property="og:title"
-        content="Resubase - Designed to cater the needs of developers"
-      />
-      <meta property="og:url" content="resubase.vercel.app" />
-      <meta property="og:image" content="/resubase-default.png" />
-      <meta property="og:site_name" content="Resubase" />
-      <meta property="og:type" content="website" />
-      <meta
-        property="og:description"
-        content="Resubase is a powerful platform designed to cater to the needs of developers worldwide."
-      />
-      <meta
-        property="og:title"
-        content="Resubase is a powerful platform designed to cater to the needs of developers worldwide."
-      />
+      <Head>
+        <title>Resubase - Designed to cater the needs of developers</title>
+        <meta
+          name="description"
+          content="Resubase is a powerful platform designed to cater to the needs of developers worldwide."
+        />
+        <meta
+          name="google-site-verification"
+          content="l1a2fyP4jz21WqSIR2HNxLAyt__hUNkV-48f_zbVHYE"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="twitter:card"
+          content="Resubase is a powerful platform designed to cater to the needs of developers worldwide."
+        />
+        <meta name="twitter:site" content="Resubase" />
+        <meta name="twitter:creator" content="@timi" />
+        <meta
+          property="og:title"
+          content="Resubase - Designed to cater the needs of developers"
+        />
+        <meta property="og:url" content="resubase.vercel.app" />
+        <meta property="og:image" content="/resubase-default.png" />
+        <meta property="og:site_name" content="Resubase" />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:description"
+          content="Resubase is a powerful platform designed to cater to the needs of developers worldwide."
+        />
+        <meta
+          property="og:title"
+          content="Resubase is a powerful platform designed to cater to the needs of developers worldwide."
+        />
 
-      <link
-        rel="apple-touch-icon"
-        sizes="180x180"
-        href="/apple-touch-icon.png?v=2"
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="32x32"
-        href="/favicon-32x32.png?v=2"
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href="/favicon-16x16.png?v=2"
-      />
-      <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
-      <link rel="manifest" href="/hub/site.webmanifest" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png?v=2"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png?v=2"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png?v=2"
+        />
+        <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
+      </Head>
       <main className={`${styles.main}`}>
         <Header styles={styles} />
-        <div className={styles.center}>
-          <div className={styles.field}>
-            <textarea
-              name=""
-              id=""
-              value={value}
-              cols={30}
-              rows={10}
-              placeholder="Write something here..."
-              onChange={handleTextUpdate}
-            ></textarea>
-            <div className={styles.bottomField}>
-              <div className={styles.btnBx}>
-                <button
-                  id={styles.postBtn}
-                  className={isActive ? styles.active : ""}
-                  data-state={isPosting ? "active" : ""}
-                  onClick={submitQuestion}
-                >
-                  {isPosting ? "Posting" : "Post"}
-                </button>
-              </div>
-              <div className={styles.media}>
-                <input
-                  type="file"
-                  name="image-file"
-                  id="upload-image"
-                  hidden
-                  accept="image/*"
-                />
-                <label
-                  htmlFor="upload-image"
-                  className={styles.uploadBtn}
-                  title="Upload Media"
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    fill="none"
-                    stroke="#a9aaab"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    style={{ cursor: "pointer" }}
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <rect
-                      width="18"
-                      height="18"
-                      x="3"
-                      y="3"
-                      rx="2"
-                      ry="2"
-                    ></rect>
-                    <path d="M8.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 1 0 0-3z"></path>
-                    <path d="m21 15-5-5L5 21"></path>
-                  </svg>
-                </label>
-              </div>
-            </div>
-          </div>
-          {isFetching ? (
-            <div className={styles.shapes_center}>
-              <div className={styles.shapes}></div>
-            </div>
-          ) : (
-            <Question
-              question={question}
-              setIsFloatActive={setIsFloatActive}
-              setQuestionID={setQuestionID}
-              viewAnswers={viewAnswers}
-              styles={styles}
-              deletePost={deletePost}
-              upvoteQuestion={upvoteQuestion}
-              downvoteQuestion={downvoteQuestion}
-            />
-          )}
-        </div>
+        <Center
+          value={value}
+          handleTextUpdate={handleTextUpdate}
+          isActive={isActive}
+          isPosting={isPosting}
+          submitQuestion={submitQuestion}
+          handleImageUpload={handleImageUpload}
+          isFetching={isFetching}
+          question={question}
+          setIsFloatActive={setIsFloatActive}
+          setQuestionID={setQuestionID}
+          viewAnswers={viewAnswers}
+          styles={styles}
+          deletePost={deletePost}
+          upvoteQuestion={upvoteQuestion}
+          downvoteQuestion={downvoteQuestion}
+          qImageProps={qImageProps}
+        />
         <FloatMenu
           styles={styles}
           isFloatActive={isFloatActive}

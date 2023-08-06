@@ -11,6 +11,12 @@ interface QuestiopComProp {
   deletePost: (id: string) => void;
   upvoteQuestion: (id: string) => void;
   downvoteQuestion: (id: string) => void;
+  qImageProps: {
+    isImageUploading: boolean;
+    isComponentVisible: boolean;
+    isImageComponentVisible: boolean;
+    qImageURL: string;
+  };
 }
 
 export default function Question({
@@ -22,6 +28,7 @@ export default function Question({
   deletePost,
   upvoteQuestion,
   downvoteQuestion,
+  qImageProps,
 }: QuestiopComProp) {
   interface QuestionProp {
     username: string;
@@ -29,6 +36,7 @@ export default function Question({
     question: string;
     questionID: string;
     imageURL: string;
+    thumbnailURL: string;
     interactions: {
       upvotes: number;
       downvotes: number;
@@ -63,6 +71,16 @@ export default function Question({
               <div className={styles.qusText}>
                 <p>{item.question}</p>
               </div>
+              {item.thumbnailURL && (
+                <div className={styles.qusThumb}>
+                  <Image
+                    src={item.thumbnailURL}
+                    width={500}
+                    height={500}
+                    alt="Picture of the author"
+                  />
+                </div>
+              )}
               <div className={styles.qusBtn}>
                 <span
                   className={styles.qusComment}

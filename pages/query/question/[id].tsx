@@ -15,6 +15,7 @@ export default function QueryQuestion() {
     questionID: "",
     question: "",
     imageURL: "",
+    thumbnailURL: "",
     interactions: {
       upvotes: 0,
       downvotes: 0,
@@ -101,6 +102,16 @@ export default function QueryQuestion() {
             <div className={styles.qusText}>
               <p>{questions.question}</p>
             </div>
+            {questions.thumbnailURL && (
+              <div className={styles.qusThumb}>
+                <Image
+                  src={questions.thumbnailURL}
+                  width={500}
+                  height={500}
+                  alt="Image"
+                />
+              </div>
+            )}
             <div className={styles.qusBtn}>
               <span
                 className={styles.qusUpvote}

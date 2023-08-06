@@ -84,7 +84,7 @@ export default function FloatMenu({
           value={value}
           cols={30}
           rows={10}
-          placeholder="Feather your mind..."
+          placeholder="Answer this question"
           onChange={handleInputUpdate}
         ></textarea>
         <div className={styles.cmBtn}>

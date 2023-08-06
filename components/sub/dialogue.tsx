@@ -5,7 +5,9 @@ interface DialogueProp {
   hideDialogue: () => void;
   logState: {
     isVisible: boolean;
+    isErr: boolean;
     logMessage: string;
+    headerMessage: string;
   };
 }
 export default function Dialogue({
@@ -20,7 +22,7 @@ export default function Dialogue({
     >
       <div className={styles.dialogue}>
         <div className={styles.dialogueHeader}>
-          <h3>Unauthroized Access</h3>
+          <h3 id={logState.isErr ? styles.err : ""}>{logState.headerMessage}</h3>
         </div>
         <div className={styles.dialogueCenter}>
           <p>{logState.logMessage}</p>
