@@ -2,8 +2,6 @@
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/creative-tutorials/resubase/blob/main/LICENSE) ![GitHub issues](https://img.shields.io/github/issues/creative-tutorials/resubase) ![GitHub tag checks state](https://img.shields.io/github/checks-status/creative-tutorials/resubase/8.9.12)
 
-
-
 ## Table of Contents
 
 - **[Introduction](#introduction)**
@@ -15,31 +13,29 @@
 
 ## Introduction
 
-Resubase is a powerful platform designed to cater to the needs of developers worldwide. Whether you are a beginner looking for guidance, a seasoned coder seeking new opportunities, or just love to solve coding challenges, Resubase has got you covered!
-
-Our mission is to create a vibrant community of developers where they can freely ask questions, share knowledge, find job opportunities, and work on exciting coding projects together. With a user-friendly interface and a plethora of features, Resubase aims to streamline your coding journey like never before.
+Welcome to Resubase, the ultimate platform designed to supercharge your learning journey as a developer. With a focus on efficiency and practicality, Resubase equips you with a comprehensive range of resources, engaging quizzes, and real-world practice challenges to elevate your skills and knowledge.
 
 ## Features
 
-- **Q&A Section**: Ask and answer coding-related questions, share knowledge, and learn from experienced developers in the community.
+- **Extensive Resource Library**: Our platform boasts an extensive and ever-growing resource library, curated by industry experts. Dive into a wide array of tutorials, articles, and documentation covering the latest technologies, programming languages, and development trends.
 
 - **Job Board**: Explore a curated list of job opportunities tailored specifically for developers, making job hunting hassle-free.
 
-- **Daily Coding Challenges/Projects**: Participate in daily coding challenges and collaborative projects to enhance your coding skills and build a strong portfolio.
+- **Interactive Quizzes**: Learning doesn't have to be tedious. Resubase offers interactive quizzes that challenge your understanding and reinforce your learning. Put your knowledge to the test with our thoughtfully designed quizzes that cover a broad spectrum of topics.
 
-- **Tech Articles**: Read insightful articles written by experts on various tech topics and stay updated with the latest trends.
+- **Real-world Practice Challenges**: Theory is important, but practical application is where true mastery shines. Resubase provides a collection of real-world practice challenges designed to simulate actual development scenarios. Sharpen your problem-solving skills and gain hands-on experience that sets you apart.
 
-- **Personalized Dashboard**: Get a personalized dashboard to track your progress, contributions, and achievements.
-
-- **Community-driven**: Resubase thrives on its community, promoting collaboration and support among developers worldwide.
+- **Community-driven**: Join the resubase [discord](https://discord.com/invite/8yC22UZjzh) channel today
 
 ## Tech Stack
 
 - Frontend: Next.js
-- Database: Supabase, MongoDB
-- Backend: Node.js, Express
+- Database: Supabase, MongoDB, Redis
+- Backend: Node.js, Express, AWS, Vercel
 
 ## Getting Started
+
+>**Note**: It is required you use [pnpm](https://pnpm.io/installation)
 
 To get started with Resubase, follow these steps:
 
@@ -53,32 +49,23 @@ git clone https://github.com/yourusername/resubase.git
 2. Install the dependencies for frontend and backend:
 
 ```bash
-cd resubase/frontend
-npm install
-
-cd ../backend
-npm install
-
+cd resubase
+$pnpm install
 ```
 
 1. Set up the database:
 
 - **Supabase**: Follow their documentation to set up and configure Supabase.
-- **MongoDB**: Install MongoDB and ensure it's running.
+- **Next.js**: Follow the Next.js [docs](https://nextjs.org/docs/getting-started/installation) on the pages router carefully.
 
 1. Configure the environment variables:
 
-Create a `.env` file in the `frontend` and `backend` directories and set the required environment variables.
+Create a `.env` file at the root of the project
 
 1. Run the application:
 
 ```bash
-# Frontend (from the frontend directory)
-npm run dev
-
-# Backend (from the backend directory)
-npm start
-
+$pnpm run dev
 ```
 
 1. Open your browser and visit <http://localhost:3000> to access Resubase.
@@ -93,21 +80,18 @@ We welcome and encourage contributions from the community! To contribute to Resu
 
 ```bash
 git checkout -b my-feature
-
 ```
 
 1. Make your changes and commit them:
 
 ```bash
 git commit -m "feat: added new feature"
-
 ```
 
 1. Push your changes to your forked repository
 
 ```bash
 git push origin my-feature
-
 ```
 
 - Create a Pull Request from your forked repository to the main repository.
@@ -120,6 +104,6 @@ Resubase is open-source software licensed under the MIT License. See the LICENSE
 
 ----
 
-Thank you for choosing Resubase to enhance your coding journey! We hope you find our platform helpful and wish you success in your coding endeavors. If you have any questions or suggestions, feel free to reach out to us.
+Thanks for joining/choosing resubase, we hope to deliver great opportunies straight to your door step. If you need help don't hesitate to [contact us](https://tally.so/r/meQxol)
 
-Happy coding! 😊
+Go rock your coding career 😎
