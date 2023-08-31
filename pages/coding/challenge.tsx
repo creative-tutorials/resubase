@@ -109,7 +109,7 @@ export default function DailyChallenge() {
     }
     axios
       .post(
-        `https://api-resubase.vercel.app/${userProp?.id}`,
+        `http://localhost:8080/submission/${userProp?.id}`,
         {
           projectName: form.projectName,
           url: form.url,
@@ -248,7 +248,7 @@ export default function DailyChallenge() {
         };
       });
       axios
-        .get("https://api-resubase.vercel.app/challenge", {
+        .get("http://localhost:8080/challenge", {
           headers: {
             "Content-Type": "application/json",
             apikey: process.env.NEXT_PUBLIC_SERVER_CONNECTION_APIKEY,

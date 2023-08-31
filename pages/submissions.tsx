@@ -41,7 +41,7 @@ export default function Submissions() {
   async function getSubmission() {
     setIsLoading(true);
     axios
-      .get("https://api-resubase.vercel.app/submission", {
+      .get("http://localhost:8080/submission", {
         headers: {
           "Content-Type": "application/json",
           apikey: process.env.NEXT_PUBLIC_SERVER_CONNECTION_APIKEY,
@@ -67,7 +67,7 @@ export default function Submissions() {
 
   const removeSubmisison = async (subID: string, userid: string) => {
     axios
-      .delete(`https://api-resubase.vercel.app/${subID}/${userid}`, {
+      .delete(`http://localhost:8080/submission/${subID}/${userid}`, {
         headers: {
           "Content-Type": "application/json",
           apikey: process.env.NEXT_PUBLIC_SERVER_CONNECTION_APIKEY,

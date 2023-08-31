@@ -34,7 +34,7 @@ export default function Job() {
   const fetchJobs = async () => {
     setIsLoading(true);
     axios
-      .get("https://api-resubase.vercel.app/jobs", {
+      .get("http://localhost:8080/jobs", {
         headers: {
           "Content-Type": "application/json",
           apikey: process.env.NEXT_PUBLIC_SERVER_CONNECTION_APIKEY,
