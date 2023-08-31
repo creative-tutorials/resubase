@@ -25,8 +25,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-import error from "../json/error";
-
 // console.log()
 
 type dataType = {
@@ -89,8 +87,8 @@ export default function DailyChallenge() {
     if (!isSignedIn) {
       toast({
         variant: "destructive",
-        title: error().cause,
-        description: error().message,
+        title: "Unauthenticated",
+        description: "Login required",
         action: <ToastAction altText="Okay">Okay</ToastAction>,
       });
     }
