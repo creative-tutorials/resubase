@@ -83,46 +83,6 @@ export default function DailyChallenge() {
     image: "",
   });
 
-  const fetchChallenge = async () => {
-    setAppState((prev) => {
-      return {
-        ...prev,
-        isLoading: true,
-      };
-    });
-    axios
-      .get("http://localhost:8080/challenge", {
-        headers: {
-          "Content-Type": "application/json",
-          apikey: process.env.NEXT_PUBLIC_SERVER_CONNECTION_APIKEY,
-        },
-      })
-      .then(function (response) {
-        setData(response.data);
-        setAppState((prev) => {
-          return {
-            ...prev,
-            isLoading: false,
-          };
-        });
-      })
-      .catch(function (error) {
-        console.error(error.response);
-        setAppState((prev) => {
-          return {
-            ...prev,
-            isLoading: false,
-          };
-        });
-        toast({
-          variant: "destructive",
-          title: error.response.data.error,
-          description: "Something's not right!",
-          action: <ToastAction altText="Okay">Okay</ToastAction>,
-        });
-      });
-  };
-
   const processSubmission = async () => {
     if (!isSignedIn) {
       toast({
@@ -279,12 +239,52 @@ export default function DailyChallenge() {
 
   useEffect(() => {
     setCounter((prev) => prev + 1);
+
+    const fetchChallenge = async () => {
+      setAppState((prev) => {
+        return {
+          ...prev,
+          isLoading: true,
+        };
+      });
+      axios
+        .get("http://localhost:8080/challenge", {
+          headers: {
+            "Content-Type": "application/json",
+            apikey: process.env.NEXT_PUBLIC_SERVER_CONNECTION_APIKEY,
+          },
+        })
+        .then(function (response) {
+          setData(response.data);
+          setAppState((prev) => {
+            return {
+              ...prev,
+              isLoading: false,
+            };
+          });
+        })
+        .catch(function (error) {
+          console.error(error.response);
+          setAppState((prev) => {
+            return {
+              ...prev,
+              isLoading: false,
+            };
+          });
+          toast({
+            variant: "destructive",
+            title: error.response.data.error,
+            description: "Something's not right!",
+            action: <ToastAction altText="Okay">Okay</ToastAction>,
+          });
+        });
+    };
     counter === 1 && fetchChallenge();
 
     return () => {
       setCounter(0);
     };
-  }, [counter]);
+  }, [counter, toast]);
 
   return (
     <>
@@ -550,7 +550,9 @@ export default function DailyChallenge() {
                             </div>
                             <div className="w-[100%] mt-3">
                               {item.hasSubscription === "paid" && (
-                                <Link href={`https://resubase.lemonsqueezy.com/checkout/buy/ab215088-c7ec-4e04-95f3-fefac0cfae57`}>
+                                <Link
+                                  href={`https://resubase.lemonsqueezy.com/checkout/buy/ab215088-c7ec-4e04-95f3-fefac0cfae57`}
+                                >
                                   <button className="w-[100%] p-3 bg-purple text-white font-semibold rounded-md transition-all hover:bg-primepurple">
                                     Start Challenge
                                   </button>
