@@ -1,57 +1,30 @@
 import { UserButton } from "@clerk/nextjs";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 interface HeaderProp {
   styles: {
     readonly [key: string]: string;
   };
+  setIsSidebarActive: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function Header({ styles }: HeaderProp) {
+export default function Header({ styles, setIsSidebarActive }: HeaderProp) {
   const router = useRouter();
   const [value, setValue] = useState("");
   const [searchAlgorithm, setSearchAlgorithm] = useState({
     question: "",
   });
 
-  const updateValue = async (event: { target: { value: string } }) => {
-    // if(event.target.value.startsWith)
-    const inputValue = event.target.value;
-    setValue(inputValue);
-
-    if (inputValue.includes("question:")) {
-      const question = inputValue
-        .substring(inputValue.indexOf("question:") + 9)
-        .trim(); // Extract the rest of the input after "question:"
-      setSearchAlgorithm((prev) => {
-        return {
-          ...prev,
-          question,
-        };
-      });
+  const handleSearch = async (event: { ctrlKey: any; key: string; preventDefault: () => void; }) => {
+    if (event.ctrlKey && event.key === "k") {
+      event.preventDefault();
+      // Do something
+      console.info("do something")
+      setIsSidebarActive(true)
     }
   };
-
-  const handleSearch = async (event: { key: string }) => {
-    if (event.key === "Enter") {
-      console.log(searchAlgorithm);
-
-      axios
-        .post(`https://api-resubase.vercel.app/question/query`, {
-          question: searchAlgorithm.question,
-        })
-        .then(function (response) {
-          // console.log(response.data);
-          router.push(`/query/question/${response.data.questionID}`)
-        })
-        .catch(function (error) {
-          console.error(error.response);
-        });
-    }
-  };
-
   return (
     <div className={styles.header}>
       <div className={styles.inputBx}>
@@ -69,15 +42,24 @@ export default function Header({ styles }: HeaderProp) {
           <path d="M11 3a8 8 0 1 0 0 16 8 8 0 1 0 0-16z"></path>
           <path d="m21 21-4.35-4.35"></path>
         </svg>
-        <input
-          type="text"
-          value={value}
-          placeholder="Search"
-          onChange={updateValue}
-          onKeyUp={handleSearch}
-        />
+        <input type="text" value={value} placeholder="Search" onKeyDown={handleSearch} readOnly />
       </div>
       <div
+        className="cursor-pointer"
+        title="Menu"
+        onClick={() => setIsSidebarActive(true)}
+      >
+        <svg
+          width="20"
+          height="20"
+          fill="#D8CDFF"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M3 18h18v-2H3v2Zm0-5h18v-2H3v2Zm0-7v2h18V6H3Z"></path>
+        </svg>
+      </div>
+      {/* <div
         className={styles.home}
         title="home"
         onClick={() => router.push("/")}
@@ -132,7 +114,7 @@ export default function Header({ styles }: HeaderProp) {
           ></path>
           <path d="M21.118 12.07a.2.2 0 0 0-.282-.17c-5.571 2.467-12.101 2.467-17.672 0a.2.2 0 0 0-.282.17 26.88 26.88 0 0 0 .307 5.727 2.61 2.61 0 0 0 2.367 2.184l1.872.152c3.043.245 6.1.245 9.144 0l1.872-.151a2.61 2.61 0 0 0 2.367-2.185c.306-1.895.41-3.815.307-5.726Z"></path>
         </svg>
-      </div>
+      </div> */}
       <div className={styles.UserProfile}>
         <UserButton />
       </div>

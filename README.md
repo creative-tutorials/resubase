@@ -1,6 +1,8 @@
 # Resubase - Empowering Developers
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/creative-tutorials/resubase/blob/main/LICENSE)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/creative-tutorials/resubase/blob/main/LICENSE) ![GitHub issues](https://img.shields.io/github/issues/creative-tutorials/resubase) ![GitHub tag checks state](https://img.shields.io/github/checks-status/creative-tutorials/resubase/8.9.12)
+
+
 
 ## Table of Contents
 

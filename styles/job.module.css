@@ -6,77 +6,15 @@
 }
 .jobs {
   padding: 20px;
-  background-color: var(--darker-bg);
-  border: 1px solid var(--dark2-bg);
+  background-color: rgb(18, 18, 21);
+  border: 1px solid #3035406e;
   border-radius: 5px;
   margin-top: 1rem;
 }
-.jobProfile {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-.profileDescription #jobOffice {
-  font-size: 1.1rem;
-  color: #fff;
-  font-weight: 500;
-}
-.profileDescription #jobRole {
-  margin-top: 0.2rem;
-  color: rgb(135, 162, 242);
-}
-.bottom {
-  margin-left: 87px;
-}
-.extra {
-  display: flex;
-  gap: 1rem;
-}
-.extra #employmentType, #jobLocation {
-  padding: 10px 20px;
-  border-radius: 3px;
-  background-color: rgb(41, 43, 48);
-  color: #efefef;
-}
-.skillsTag {
-  display: flex;
-  gap: 1rem;
-  margin-top: 0.9rem;
-}
-.skillsTag #skillTxe {
-  padding: 10px 20px;
-  border-radius: 3px;
-  background-color: rgb(135, 162, 242);
-  color: rgb(15, 16, 18);
-}
-.applyButton {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 2rem;
-}
-.applyButton #apply {
-  padding: 13px 20px;
-  border-radius: 4px;
-  border: 1px solid rgb(71, 112, 233);
-  outline: none;
-  background-color: transparent;
-  font-size: 1rem;
-  font-weight: 500;
-  color: rgb(71, 112, 233);
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
-}
-.applyButton #apply:hover {
-  background-color: rgba(71, 112, 233, 0.07);
+.ajs {
+  background-color: #7248fc12;
 }
 @media screen and (max-width:724px) {
-  .skillsTag {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 0.9rem;
-  }
   .extra {
     margin-top: 1rem;
   }

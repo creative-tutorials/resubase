@@ -1,21 +1,17 @@
 import Head from "next/head";
-import Sidebar from "@/components/main/Sidebar";
-import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
-import Header from "@/components/main/Header";
-import { useState } from "react";
+import { useRouter } from "next/router";
 
-const inter = Inter({ subsets: ["latin"] });
-
-
-export default function Home() {
-  const [isSidebarActive, setIsSidebarActive] = useState(false);
-
+export default function EmbedCode() {
+  const router = useRouter();
+  const { id } = router.query;
   return (
     <>
       <Head>
-        <title>Resubase/Home</title>
-        <meta name="description" content="Welcome to the resubase community" />
+        <title>Resubase</title>
+        <meta
+          name="description"
+          content="Interactive, fun, challenging challenges from beginner to expert level"
+        />
         <meta
           name="keywords"
           content="Programming, Learn Coding, Resubase, Coding Challenge, ResuAI, ResuChat"
@@ -27,10 +23,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="og:url" content="https://resubase.vercel.app" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Resubase/Home" />
+        <meta
+          property="og:title"
+          content={`Resubase`}
+        />
         <meta
           property="og:description"
-          content="Welcome to the resubase community"
+          content="Interactive, fun, challenging challenges from beginner to expert level"
         />
         <meta
           property="og:image"
@@ -40,10 +39,13 @@ export default function Home() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="resubase.vercel.app" />
         <meta property="twitter:url" content="https://resubase.vercel.app" />
-        <meta name="twitter:title" content="Resubase/Home" />
+        <meta
+          name="twitter:title"
+          content={`Resubase`}
+        />
         <meta
           name="twitter:description"
-          content="Welcome to the resubase community"
+          content="Interactive, fun, challenging challenges from beginner to expert level"
         />
         <meta
           name="twitter:image"
@@ -69,15 +71,15 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
       </Head>
-      <main className={`${styles.main}`}>
-        <Header styles={styles} setIsSidebarActive={setIsSidebarActive} />
-        <Sidebar
-          styles={styles}
-          isSidebarActive={isSidebarActive}
-          setIsSidebarActive={setIsSidebarActive}
-        />
-        <p>Redirecting....</p>
-      </main>
+      <div className="w-[100%] h-[100%] p-5">
+        <iframe
+          className={"border-none rounded-md w-[100%] h-[700px]"}
+          // width="800"
+          // height="450"
+          src="https://codesandbox.io/p/sandbox/jolly-dijkstra-yzl475?file=%2Fdist%2Foutput.css%3A1%2C1&embed=1"
+          // allowFullscreen
+        ></iframe>
+      </div>
     </>
   );
 }

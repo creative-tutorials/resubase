@@ -5,6 +5,10 @@ import { dark } from "@clerk/themes";
 
 export default function App({ Component, pageProps }: AppProps) {
   const PublishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+  // const isRedirectLoop = req.headers.get('x-clerk-auth-message') === 'Infinite redirect loop detected';
+  if (!PublishableKey) {
+    throw new Error("Missing CLERK_PUBLISHABLE_KEY environment variable.");
+  }
   return (
     <ClerkProvider
       {...pageProps}
