@@ -109,7 +109,7 @@ export default function DailyChallenge() {
     }
     axios
       .post(
-        `https://api-resubase.vercel.app/${userProp?.id}`,
+        `https://api-resubase.vercel.app/submission/${userProp?.id}`,
         {
           projectName: form.projectName,
           url: form.url,

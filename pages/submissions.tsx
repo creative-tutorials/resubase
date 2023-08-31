@@ -67,7 +67,7 @@ export default function Submissions() {
 
   const removeSubmisison = async (subID: string, userid: string) => {
     axios
-      .delete(`https://api-resubase.vercel.app/${subID}/${userid}`, {
+      .delete(`https://api-resubase.vercel.app/submission/${subID}/${userid}`, {
         headers: {
           "Content-Type": "application/json",
           apikey: process.env.NEXT_PUBLIC_SERVER_CONNECTION_APIKEY,
