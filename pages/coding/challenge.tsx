@@ -25,7 +25,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-import { error } from "../json/error";
+import error from "../json/error";
+
+// console.log()
 
 type dataType = {
   projectName: string;
@@ -87,8 +89,8 @@ export default function DailyChallenge() {
     if (!isSignedIn) {
       toast({
         variant: "destructive",
-        title: error.cause,
-        description: error.message,
+        title: error().cause,
+        description: error().message,
         action: <ToastAction altText="Okay">Okay</ToastAction>,
       });
     }
