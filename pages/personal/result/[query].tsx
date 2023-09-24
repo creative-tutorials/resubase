@@ -54,7 +54,7 @@ export default function Result() {
   const router = useRouter();
   const { toast } = useToast();
   const inputElement = useRef<HTMLInputElement | null>(null);
-  const { query } = router.query;
+  const { query }:any = router.query;
   const [resQuery, setResQuery] = useState<stateQuery>("");
   const [errMsg, setErrMsg] = useState<errType>("");
   const [counter, setCounter] = useState(0);
