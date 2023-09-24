@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "target": "Firebase"
+  },
+  {
+    "id": 2,
+    "target": "Supabase"
+  },
+  {
+    "id": 3,
+    "target": "Appwrite"
+  },
+  {
+    "id": 4,
+    "target": "Clerk"
+  },
+  {
+    "id": 5,
+    "target": "NextAuth"
+  },
+  {
+    "id": 6,
+    "target": "MongoDB"
+  },
+  {
+    "id": 7,
+    "target": "PostgreSQL"
+  },
+  {
+    "id": 8,
+    "target": "Prisma"
+  },
+  {
+    "id": 9,
+    "target": "Drizzle ORM"
+  }
+]

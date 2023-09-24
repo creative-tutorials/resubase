@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "target": "Django"
+  },
+  {
+    "id": 2,
+    "target": "Express.js"
+  },
+  {
+    "id": 3,
+    "target": "Angular"
+  },
+  {
+    "id": 4,
+    "target": "React.js"
+  },
+  {
+    "id": 5,
+    "target": "NestJS"
+  },
+  {
+    "id": 6,
+    "target": "Vue.js"
+  },
+  {
+    "id": 7,
+    "target": "Nuxt.js"
+  },
+  {
+    "id": 8,
+    "target": "Svelete.js"
+  },
+  {
+    "id": 9,
+    "target": "Sveletekit"
+  },
+  {
+    "id": 10,
+    "target": "Astro"
+  }
+]

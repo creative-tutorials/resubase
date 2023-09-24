@@ -26,21 +26,8 @@ const nextConfig = {
     return [
       {
         source: "/",
-        destination: "/app",
+        destination: "/personal/search",
         permanent: true,
-      },
-      {
-        source: "/coding/challenge",
-        destination: "/app",
-        permanent: true,
-      },
-    ];
-  },
-  async rewrites() {
-    return [
-      {
-        source: "/app",
-        destination: "/coding/challenge",
       },
     ];
   },

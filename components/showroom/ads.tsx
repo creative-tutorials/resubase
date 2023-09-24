@@ -8,13 +8,13 @@ type typeShwcase = {
 
 export default function AdsShwcase({ setPreviewURL }: typeShwcase) {
   return (
-    <div className="p-4 w-[100%] max-w-md bg-guild border border-guildbc flex flex-col items-center text-center rounded-lg gap-2 cursor-pointer select-none">
+    <div className="p-4 w-full max-w-md bg-guild border border-guildbc flex flex-col items-center text-center rounded-lg gap-2 cursor-pointer select-none">
       <div className="">
         <h3 className="text-white">Checkout Page</h3>
       </div>
       <div className="w-[100%] h-[100%] rounded-lg overflow-hidden relative">
         <Image
-          className="w-[100%] h-[300px] object-cover rounded-lg overflow-hidden hover:scale-110 transition-all"
+          className="w-full h-[300px] object-cover rounded-lg overflow-hidden hover:scale-110 transition-all"
           src={process.env.NEXT_PUBLIC_PRO as string}
           width={500}
           height={500}
@@ -23,7 +23,7 @@ export default function AdsShwcase({ setPreviewURL }: typeShwcase) {
           blurDataURL="/vercel.svg"
           alt="Pro Image"
         />
-        <div className="absolute w-[100%] h-[100%] bottom-0 p-2 bg-purple/20 flex items-center justify-center backdrop-blur-md">
+        <div className="absolute w-full h-full bottom-0 p-2 bg-purple/20 flex items-center justify-center backdrop-blur-md">
           <span className="text-2xl flex flex-col items-center text-white font-medium">
             <svg
               width="50"
