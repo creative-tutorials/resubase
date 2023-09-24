@@ -265,7 +265,7 @@ export default function Result() {
                     })}
                   </Fragment>
                 ) : (
-                  <p className="text-light-purple">{errMsg || "not found"}</p>
+                  <span className="text-light-purple">{errMsg || "not found"}</span>
                 )}
               </Fragment>
             )}
