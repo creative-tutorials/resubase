@@ -26,7 +26,7 @@ const nextConfig = {
     return [
       {
         source: "/",
-        destination: "/personal/search",
+        destination: "/personal/feed",
         permanent: true,
       },
     ];
