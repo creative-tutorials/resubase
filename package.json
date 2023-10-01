@@ -25,7 +25,7 @@
     "@radix-ui/react-toast": "^1.1.5",
     "@radix-ui/react-tooltip": "^1.0.7",
     "@supabase/supabase-js": "^2.37.0",
-    "@types/node": "20.7.2",
+    "@types/node": "20.8.0",
     "@types/react": "18.2.23",
     "@types/react-dom": "18.2.8",
     "axios": "^1.5.1",
