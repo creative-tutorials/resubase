@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect, Fragment, ChangeEvent } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -25,6 +25,11 @@ type feedType = {
   imageURL: string;
 };
 
+type errState = {
+  isError: boolean;
+  errorMessage: string;
+};
+
 type deployState = boolean;
 
 export default function Feed() {
@@ -33,8 +38,12 @@ export default function Feed() {
   const [counter, setCounter] = useState(0);
   const [isRendering, setIsRendering] = useState(false);
   const [feedArray, setFeedArray] = useState([]);
+  const [errorState, setErrorState] = useState<errState>({
+    isError: false,
+    errorMessage: "",
+  });
 
-  const [isProd, setIsProd] = useState<deployState>(true);
+  const [isProd, setIsProd] = useState<deployState>(false);
   useEffect(() => {
     setCounter((prev) => prev + 1);
     counter === 1 && fetchFeed();
@@ -42,20 +51,40 @@ export default function Feed() {
     async function fetchFeed() {
       setIsRendering(true);
       axios
-        .get(`${isProd ? 'https://api-resubase.vercel.app/feed' : 'http://localhost:8080/feed'}`, {
-          headers: {
-            "Content-Type": "application/json",
-            apikey: process.env.NEXT_PUBLIC_SERVER_CONNECTION_APIKEY,
-          },
-        })
+        .get(
+          `${
+            isProd
+              ? "https://api-resubase.vercel.app/feed"
+              : "http://localhost:8080/feed"
+          }`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              apikey: process.env.NEXT_PUBLIC_SERVER_CONNECTION_APIKEY,
+            },
+          }
+        )
         .then(function (response) {
-          console.log(response.data);
           setFeedArray(response.data);
           setIsRendering(false);
+          setErrorState((prev) => {
+            return {
+              ...prev,
+              isError: false,
+              errorMessage: "",
+            };
+          });
         })
         .catch(function (error) {
           console.error(error.response);
           setIsRendering(false);
+          setErrorState((prev) => {
+            return {
+              ...prev,
+              isError: true,
+              errorMessage: error.response.data.error,
+            };
+          });
         });
     }
     return () => {
@@ -63,22 +92,54 @@ export default function Feed() {
     };
   }, [counter, isProd]);
 
-
-
-  const handleSearchRequest = async (event: { target: { value: any } }) => {
-    const { value } = event.target;
-    if (value !== "" || value !== undefined || value !== null) {
-      setSearch(value);
-    }
+  const handleInputChange = async (event: ChangeEvent<HTMLInputElement>) => {
+    // const { value } = event.target;
+    const value = event.target.value.toLowerCase();
+    setSearch(value);
   };
 
-  const handleEnterKeyPress = (event: { key: string }) => {
-    if (event.key === "Enter") {
-      if (search === "") {
-        return;
-      } else {
-        router.push(`/personal/result/${search}`);
-      }
+  const updateData = async () => {
+    if (search !== "" || search !== undefined || search !== null) {
+      setIsRendering(true);
+      axios
+        .get(
+          `${
+            isProd
+              ? `https://api-resubase.vercel.app/feed/${search}`
+              : `http://localhost:8080/feed/${search}`
+          }`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              apikey: process.env.NEXT_PUBLIC_SERVER_CONNECTION_APIKEY,
+            },
+          }
+        )
+        .then(function (response) {
+          setFeedArray(response.data);
+          setIsRendering(false);
+          setErrorState((prev) => {
+            return {
+              ...prev,
+              isError: false,
+              errorMessage: "",
+            };
+          });
+        })
+        .catch(function (error) {
+          console.error(error.response);
+          setFeedArray([]);
+          setIsRendering(false);
+          setErrorState((prev) => {
+            return {
+              ...prev,
+              isError: true,
+              errorMessage: error.response.data.error,
+            };
+          });
+        });
+    } else {
+      console.error("invalid input");
     }
   };
 
@@ -164,6 +225,8 @@ export default function Feed() {
                   <Input
                     id="name"
                     placeholder="Search post"
+                    onChange={handleInputChange}
+                    value={search}
                     autoComplete="off"
                     // defaultValue="React router v6 documentation"
                     className="w-full border border-card_border_color_hover text-white"
@@ -171,14 +234,21 @@ export default function Feed() {
                 </div>
               </div>
               <DialogFooter>
-                <Button className="text-white bg-card_border_color hover:bg-card_border_color_hover">
-                  Search
+                <Button
+                  className={`${
+                    isRendering
+                      ? "text-white pointer-events-none bg-card_border_color/30"
+                      : "text-white bg-card_border_color hover:bg-card_border_color_hover"
+                  }`}
+                  onClick={updateData}
+                >
+                  {isRendering ? "Please wait..." : "Search"}
                 </Button>
               </DialogFooter>
             </DialogContent>
           </Dialog>
         </div>
-        <div className="mt-8 flex flex-wrap gap-6">
+        <div className="mt-8 flex flex-wrap gap-6 scroll-smooth">
           {isRendering ? (
             <div className="flex items-center space-x-4">
               <Skeleton className="h-12 w-12 rounded-full bg-card_border_color" />
@@ -228,6 +298,15 @@ export default function Feed() {
             </Fragment>
           )}
         </div>
+        {errorState.isError && (
+          <div className="mt-8 flex items-center text-center justify-center">
+            <div className="flex flex-col items-center justify-center text-center">
+              <MagnifyingGlassIcon className="w-12 h-12 text-search-button-tc" />
+              <p className="text-white text-lg md:text-2xl lg:md:text-2xl">No result found</p>
+              <span className='text-search-button-tc text-sm md:text-base lg:text-base'>{errorState.errorMessage}</span>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
