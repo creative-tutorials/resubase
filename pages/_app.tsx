@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import { ThemeProvider } from "next-themes";
 
 export default function App({ Component, pageProps }: AppProps) {
   const PublishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
@@ -17,7 +18,9 @@ export default function App({ Component, pageProps }: AppProps) {
         baseTheme: dark,
       }}
     >
-      <Component {...pageProps} />
+      <ThemeProvider attribute="class">
+        <Component {...pageProps} />
+      </ThemeProvider>
     </ClerkProvider>
   );
 }

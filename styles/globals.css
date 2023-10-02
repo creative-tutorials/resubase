@@ -9,10 +9,13 @@
   --darker-bg: #171719;
   --dark2-bg: #212124;
   ---selection-dark-color: #343438;
-  --light-bg: #f3fbfe;
+  ---selection-light-color: #e3e3f3;
+  --light-bg: #f8f9fa;
+  color-scheme: dark
 }
 ::selection {
-  background-color: var(---selection-dark-color);
+  @apply dark:bg-border-dark-hue bg-metal
+  /* background-color: var(---selection-dark-color); */
 }
 * {
   margin: 0;
@@ -22,13 +25,6 @@
   font-family: "Inter", sans-serif;
 }
 body {
-  background: var(--dark-bg);
-}
-@media (prefers-color-scheme: light) {
-  body {
-    background: var(--light-bg);
-  }
-  ::selection {
-    background-color: #c7c7ee;
-  }
+  @apply dark:bg-sidebar-link-bg bg-lightbg
+  /* background: var(--dark-bg); */
 }
