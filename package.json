@@ -1,6 +1,6 @@
 {
   "name": "resubase",
-  "version": "14.18.15",
+  "version": "14.18.16",
   "private": true,
   "scripts": {
     "dev": "next dev",
