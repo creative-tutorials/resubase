@@ -43,7 +43,7 @@ export default function Feed() {
     errorMessage: "",
   });
 
-  const [isProd, setIsProd] = useState<deployState>(false);
+  const [isProd, setIsProd] = useState<deployState>(true);
   useEffect(() => {
     setCounter((prev) => prev + 1);
     counter === 1 && fetchFeed();
